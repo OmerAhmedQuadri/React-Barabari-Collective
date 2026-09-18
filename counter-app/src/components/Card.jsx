@@ -2,6 +2,9 @@ import { useState } from "react"
 
 function Card() {
   const [count, setCount] = useState(0)
+//   count = count+1 - > wrong 
+//   setCount(count+1) - > this is the right way to update a state variable
+
   return (
     <div
         style={{
