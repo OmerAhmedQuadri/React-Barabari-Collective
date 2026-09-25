@@ -1,9 +1,34 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
 
 function ExpenseTrakcer() {
-    const [expenses, setexpenses] = useState([])
+    // usestate() can take simple value or it can also take a callback to set initial value
+    const [expenses, setexpenses] = useState(() => {
+        const saved_expenses = JSON.parse(localStorage.getItem('EXPENSES_DB')) || []
+        return saved_expenses
+    })
     const [expName, setexpName] = useState('')
     const [expAmount, setexpAmount] = useState('')
+
+
+    // useEffect(() => {
+    //     const saved_expenses = JSON.parse(localStorage.getItem('EXPENSES_DB')) || []
+    //     if(saved_expenses){
+    //         setexpenses(saved_expenses)
+    //     }
+    // }, [])
+
+    useEffect(() => {
+        console.log('every re render')
+    }, [])
+
+
+    useEffect(() => {
+        localStorage.setItem('EXPENSES_DB', JSON.stringify(expenses))
+        console.log('expense updated')
+    }, [expenses])
+
+
 
     const addExpenseToList = () => {
         if(expName.trim() == '') return
@@ -23,7 +48,10 @@ function ExpenseTrakcer() {
         setexpenses([...expenses, newExpense])
         setexpAmount('')
         setexpName('')
+
+        // localStorage.setItem('EXPENSES_DB', JSON.stringify(expenses))
     }
+
 
     const deleteExpense = (id) => {
         setexpenses(expenses.filter(exp => exp.id != id))
