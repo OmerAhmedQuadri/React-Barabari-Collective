@@ -52,7 +52,7 @@ const Form = () => {
           type="email" 
           name="studentEmail" 
           required 
-          value={formData.StudentEmail}
+          value={formData.studentEmail}
           onChange={onChangeHandler}
           className='mb-4 w-full rounded-lg border border-gray-300 px-3 py-2 outline-none transition focus:border-orange-500'
         />
