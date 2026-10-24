@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 
-const Form = () => {
-  const [formData, setFormData] = useState({
+const emptyFormData = {
     studentName: '',
     studentEmail: '',
     topic: 'React',
     rating: 0, 
     feedback: ''
-  })
+  }
+const Form = () => {
+  const [formData, setFormData] = useState(emptyFormData)
   const [feedbacks, setFeedbacks] = useState([])
 
 
   const onChangeHandler = (e) => {
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
@@ -29,7 +30,8 @@ const Form = () => {
       return
     }
     setFeedbacks([...feedbacks, {...formData, id: Date.now() }])
-    console.log(feedbacks)
+
+    setFormData(emptyFormData)
 
   }
   return (
@@ -106,10 +108,22 @@ const Form = () => {
       </form>
 
 
-      <div>
+      <div className='mt-6 space-y-3'>
         {/* {feedbacks.map} 
           reference for feedbacks in here : https://excalidraw.com/#json=R7buWCnmG_daXRTuNpJQk,xyMS6K7pVwGT_hInqYtd_w
         */}
+        {feedbacks.map(item => (
+          <div
+            key={item.id} className='rounded-xl bg-white p-4 shadow'
+          >
+            <div>
+              <h3 className='text-lg font-semibold text-gray-800'>{item.studentName} <span className='text-gray-700 text-sm'>{item.studentEmail}</span></h3>
+
+              <p className='mb-1 text-xs font-medium text-orange-600'>{item.topic} - {item.rating}/5</p>
+              <p className='text-gray-700'>{item.feedback}</p>
+            </div>
+          </div>
+        ))} 
       </div>
 
 
