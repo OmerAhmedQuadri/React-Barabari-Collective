@@ -42,6 +42,7 @@ const App = () => {
   const deleteProfile = (id) => {
     const filteredProfiles = profiles.filter(p => p.id != id)
     setProfiles(filteredProfiles)
+    setSelectedProfile(null)
 
   }
 
@@ -57,12 +58,12 @@ const App = () => {
     <div className="min-h-screen bg-stone-100">
       <Navbar page={page} showPage={showPage}/>
 
-      <main>
+      <main className="mx-auto max-w-3xl p-4 sm:p-6">
         { page == 'create' && <ProfileForm addProfile={addProfile} /> }
 
         { page == 'profiles' && !selectedProfile && <ProfileList selectProfile={setSelectedProfile} profiles={profiles} /> }
 
-        { page == 'profiles' && selectedProfile && <ProfileView goBack={() => setSelectedProfile(null)}  deleteProfile={deleteProfile} /> }
+        { page == 'profiles' && selectedProfile && <ProfileView profile={selectedProfile} goBack={() => setSelectedProfile(null)}  deleteProfile={deleteProfile} /> }
       </main>
     </div>
   )

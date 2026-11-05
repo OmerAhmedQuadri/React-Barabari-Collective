@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const emptyForm = { 
   name : '',
@@ -7,7 +7,7 @@ const emptyForm = {
   location : '',
   skills : '',
   about : '',
-
+  avatar : '',
 }
 
 const inputClasses = 'mb-4 w-full rounded-md border border-gray-400 px-3 py-2 outline-none focus:border-blue-700'
@@ -37,6 +37,9 @@ const ProfileForm = ({ addProfile }) => {
 
       <label className={labelClasses}>Name</label>
       <input className={inputClasses} name='name' value={formData.name} onChange={onChangeHandler} placeholder='Your name' type="text" required  />
+
+      <label className={labelClasses}>Avatar url</label>
+      <input className={inputClasses} name='avatar' value={formData.avatar} onChange={onChangeHandler} placeholder='https://image.url' type="text" />
       
       <label className={labelClasses}>Role</label>
       <input className={inputClasses} name='role' value={formData.role} onChange={onChangeHandler} placeholder='Frontend Developer' type="text" required  />
